@@ -1,9 +1,63 @@
+public enum class games{
+    Cricket, volleyball, carrom, chess
+}
+
 fun main(){
     //println("Hello World");
     //numberExample() //for calling numbers
     //charExample() //for character examples
-    stringOperations() //for string operations
+    //stringOperations() //for string operations
+
+    //conditionalOpsIf() //for checking if statements
+    conditionalOpsWhen() //for checking when
 }
+    private fun conditionalOpsWhen(){
+        //basic syntax of when
+        val x = 1
+        when(x){
+            1 ->  println("Value of x is 1")
+            2 -> println("Value of x is 2")
+            3,4 -> println("Value of x is 3 or 4")
+            else -> println("value of x is unknown")
+        }
+        //when can be used with strings also
+        val test = games.Cricket
+        val result = when(test){
+            games.Cricket, games.volleyball -> "Outdoor Games"
+            games.carrom, games.chess -> "Indoor Games"
+        }
+        println("Result of games is $result")
+        //When can be used for range also
+        val myAge = 30
+        val currentPhase = when(myAge){
+            in 0..1 -> "baby"
+            in 2..5 -> "toddler"
+            in 6..12 -> "kid"
+            in 13..19 -> "teenager"
+            in 20..64 -> "adult"
+            else -> "senior"
+        }
+        println("Your current phase is $currentPhase")
+
+    }
+
+    private fun conditionalOpsIf(){
+        //In kotlin every statement is an expression
+        val largeNumber = 700
+        val smallNumber = 25
+        val comparisionResult = if(largeNumber > smallNumber) true else false
+        println(comparisionResult)
+        //the same can be written below
+        val result = largeNumber > smallNumber
+        println("Normal comparision $result")
+        //the normal way of writing if
+        if(largeNumber > smallNumber){
+            println("Large Number")
+        }else{
+            println("small Number")
+        }
+    }
+
 private fun stringOperations(){
     //declaring a simple string
     val testString : String = "Hi this a simple string"

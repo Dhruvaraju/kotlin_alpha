@@ -122,3 +122,61 @@ private fun stringOperations(){
     println(strictString)
 }
 ```
+## Conditional flows
+### If
+- 'if' is used for verifying an expression and executing an action on the result of the expression
+- general syntax mentioned below:
+```
+private fun conditionalOpsIf(){
+        //In kotlin every statement is an expression
+        val largeNumber = 700
+        val smallNumber = 25
+        val comparisonResult = if(largeNumber > smallNumber) true else false
+        println(comparisonResult)
+        //the same can be written below
+        val result = largeNumber > smallNumber
+        println("Normal comparison $result")
+        //the normal way of writing if
+        if(largeNumber > smallNumber){
+            println("Large Number")
+        }else{
+            println("small Number")
+        }
+    }
+```
+### when
+- When keyword is used for multiple conditional checks
+- It is compared to the switch case in other languages
+- If we are using finite sets like enum then we do not have to write a default clause
+- for all other thing we need to write default clause called as else
+- While using a range we will make use of in key word
+```
+private fun conditionalOpsWhen(){
+        //basic syntax of when
+        val x = 1
+        when(x){
+            1 ->  println("Value of x is 1")
+            2 -> println("Value of x is 2")
+            3,4 -> println("Value of x is 3 or 4")
+            else -> println("value of x is unknown")
+        }
+        //when can be used with strings also
+        val test = games.Cricket
+        val result = when(test){
+            games.Cricket, games.volleyball -> "Outdoor Games"
+            games.carrom, games.chess -> "Indoor Games"
+        }
+        println("Result of games is $result")
+        //When can be used for range also
+        val myAge = 30
+        val currentPhase = when(myAge){
+            in 0..1 -> "baby"
+            in 2..5 -> "toddler"
+            in 6..12 -> "kid"
+            in 13..19 -> "teenager"
+            in 20..64 -> "adult"
+            else -> "senior"
+        }
+        println("Your current phase is $currentPhase")
+    }
+```
