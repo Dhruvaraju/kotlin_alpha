@@ -180,3 +180,72 @@ private fun conditionalOpsWhen(){
         println("Your current phase is $currentPhase")
     }
 ```
+### Loops
+- The c style for loop will not work in kotlin, for is mainly used for iterating through collections and range
+- index of collections can be iterated without any additional code.
+- while and do while will work like java, break keyword is used to exit from a loop when a certain condition is met.
+```
+private  fun loopsEg(){
+        //C styles loops are not present in Kotlin for (i =0 ; i<10 ; i++) will not work
+        //basic for loop syntax
+        println("This loop will print 1 to 10 numbers")
+        for (i in 1..10){
+            print("$i \t")
+        }
+        // for mainly used for iteration of collections and array
+        val names = listOf("dex","clarke","barry","bruce")
+        println("Names will be print below")
+        for (name in names){
+            println(name)
+        }
+        //same names list will be printed with index
+        println("Names list with index")
+        for ((index,name) in names.withIndex()){
+            println("$index is $name")
+        }
+        //While loop
+        var count: Int = 5
+        while (count > 0){
+            println("Value of Count is $count")
+            count--
+        }
+        //Do while
+        var stat: Int = 5
+        do {
+           println("Value of stat is $stat")
+            stat--
+            if(stat == 2 ) break
+        }while (stat > 0)
+    }
+```
+### Nullable variables and type casting
+- A basic variable declaration will not allow it to be null in kotlin
+- we need to use the '?' at end of declaration to make a variable nullable.
+- '!!' is used to run the code as it is, it will cause any exception without the basic kotlin safeguards
+```
+data class Person(var firstName: String, var lastName: String){
+
+ }
+    private fun nullableAndCasting(){
+        //the class person cannot be declared as null like var person: Person = null
+        //This can be done only by mentioning question mark at the end
+        var person : Person? = null //the '?' at the end allows person to be null
+        val greeting:String? = "Hi"
+        if (greeting != null){ // If '?' is not used null check will not be allowed
+            println("User says $greeting")
+        }else {
+            println("Greeting is null")
+        }
+        //for all subsequent operations we need to use the '?'
+        println("Length of greeting is ${greeting?.length}")// This will print null if greeting is null without crashing the code
+        var testString : String? = "NewText"
+        val len = testString?.length ?: null
+        println("Length of test String is $len")
+        //exception throwing while a value is null
+        println(testString!!.length) //if test-string has value this will work
+
+        //type casting example
+        val castingExample: String? = greeting as? String
+        println("Typecasting example value is $castingExample")
+    }
+    ```
