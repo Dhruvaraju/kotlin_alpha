@@ -446,7 +446,50 @@ fun main(){
 
 Many constructors can be created in a single class, the constructors other than first one should implement all other constructors. To initialize properties `init` block can be used. Init is executed as many times as the class is invoked.
 
+We do not have to mention constructor keyword for the first constructor, the class variables passed in are considered as constructor parameters, in the below example `(val name: String, val dept: String, val location: String = "AP")` are initial parameters.
+
+The second constructor should implement the initial constructor as mentioned below
+
+```
+constructor(name: String, dept: String, location: String, college: String) : this(
+        name,
+        dept,
+        location
+    ) {
+        this.college = college
+    }
+```
+
+The next constructors should implement the one above it, example mentioned below.
+
 ```kotlin
+class ConstructorReference(val name: String, val dept: String, val location: String = "AP") {
+    override fun toString(): String {
+        return "$name - $dept - $location"
+    }
 
+    init {
+        println("Initialization block")
+    }
 
+    constructor(name: String, dept: String, location: String, college: String) : this(
+        name,
+        dept,
+        location
+    ) {
+        this.college = college
+    }
+
+    constructor(name: String, dept: String, location: String, college: String, project: String) : this(
+        name,
+        dept,
+        location,
+        college
+    ) {
+        this.project = project
+    }
+
+    private var college = ""
+    private var project = ""
+}
 ```
