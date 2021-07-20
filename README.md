@@ -15,8 +15,11 @@
     - [Nullable variables and type casting](#nullable-variables-and-type-casting)
   - [Array](#array)
   - [Collections](#collections)
-    - [Lists](#lists)
-    - [Sets](#sets)
+    - [List](#list)
+    - [Set](#set)
+    - [Map](#map)
+  - [Collection Operations](#collection-operations)
+  - [Sequences](#sequences)
   - [Classes](#classes)
     - [Different ways of creating classes](#different-ways-of-creating-classes)
     - [Constructors and init](#constructors-and-init)
@@ -354,7 +357,7 @@ private fun exploreArrays(){
 
 ## Collections
 
-### Lists
+### List
 
 - We have mutable lists and immutable list
 - A simple list is created by using the keyword listof
@@ -384,11 +387,104 @@ private fun exploreLists(){
     }
 ```
 
-### Sets
+### Set
 
 - Similar to Lists have mutable set and immutable set.
+- Sets does not allow duplicates
+- Normal set preserves order of addition
+- Two sets will be equal when they have the same elements in them even if order differs.
+- Hash set does not preserve order of addition
+- we can use `setOf()` or `mutableSetOf()` or `hashSetOf()` for creating sets on the go.
+- Adding values to sets will be done using `add` function
 
-> Revisit collections and sets
+```kotlin
+fun main(){
+    val exampleSet = setOf(5,4,9,4,4)
+    println(exampleSet)
+    println("size of set is ${exampleSet.size}")
+    println("Do set contain 9: ${exampleSet.contains(9)}")
+
+    val firstSet = mutableSetOf(5,4,3,2,1)
+    val secondSet = mutableSetOf(1,2,3,4,5)
+    println("are both sets equal ${firstSet == secondSet}")
+    println("First Element in firstSet: ${firstSet.first()} ")
+    println("First Element in secondSet: ${secondSet.first()} ")
+
+    val firstHashSet = hashSetOf(5,4,3,2,1)
+    val secondHashSet = hashSetOf(1,2,3,4,5)
+    println("are both sets equal ${firstHashSet == secondHashSet}")
+    println("First Element in firstSet: ${firstHashSet.first()} ")
+    println("First Element in secondSet: ${secondHashSet.first()} ")
+}
+```
+
+### Map
+
+- We can have mutable and immutable maps
+- Maps is a list of key value pairs
+- A simple map can be created as `val maptwo = mapOf("ethan" to "mi", "keen" to "blacklist", "rhodes" to "chicagoMed", "dexter" to "dexter")`
+- Two maps are considered equal when they have the same key vale pairs in them.
+- Values can be fetched by using keys using get function or by the following syntax `mapOne["keen"]`
+- A key value pair can be removed from map using the remove function which takes key as input.
+- The list of keys and values can be fetched as map.keys and map.values respectively.
+- On removing a key the value is returned as output.
+
+```kotlin
+fun main(){
+    // Creating Maps
+    val mapOne = mapOf("dexter" to "dexter", "keen" to "blacklist", "ethan" to "mi", "rhodes" to "chicagoMed")
+    val maptwo = mapOf("ethan" to "mi", "keen" to "blacklist", "rhodes" to "chicagoMed", "dexter" to "dexter")
+
+    // Maps are equal when they have same keys and values and same number of key-value pairs
+    println("Are mapOne and mapTwo equal: ${mapOne == maptwo}")
+
+    // Fetching values using key
+    println("value of keen from mapOne: ${mapOne["keen"]}")
+    // If key is not present it return null or we can return a default
+    println("Value of a key narcos : ${mapOne.getOrDefault("narcos","Key not found")}")
+
+    var tvSeriesMap = mutableMapOf("narcos" to "Agent Pena", "maria" to "dexter", "charles" to "chicago med")
+    // Added new element in map
+    tvSeriesMap["john-snow"]="game of thrones"
+
+    //Removing values in a map
+    println("Is charles removed from tvSeries maps ${tvSeriesMap.remove("charles")}")
+    // Checking if a key is present in map
+    println("is narcos present in tv series: ${"narcos" in tvSeriesMap.keys}")
+    // Checking for a value in lists of values in a map
+    println("Is the value dexter available in values of map tvSeriesMap ${"dexter" in tvSeriesMap.values}")
+}
+```
+
+## Collection Operations
+
+- We can create a list using listOf() function, Map using mapOf(), set using setOf(). these are immutable.
+- map function is used to add transformations on an existing collection
+- A list can be converted to set using list.set
+- A set can be converted to list using set.list
+- We can use filter function to filter elements based on a condition
+- Sorting can also can be done. few examples are mentioned below.
+
+```kotlin
+val listExample = listOf(1,2,3,4,5,6,7,8,9,9,9)
+    val setExample = setOf(10,20,30,40,50)
+    val mapExample = mapOf(2 to 20, 5 to 50, 6 to 60)
+    //List transformed by multiplying each element by 3
+    val listMap = listExample.map { it * 3 }
+    println("updated map : ${listMap}")
+    val transformedMap = mapExample.map { Pair(it.key, it.value*2) }.toMap()
+    println("Transformed map: ${transformedMap}")
+    // Filter usage
+    val evenNumberList = listExample.filter { it % 2 == 0 }
+    println("Even numbers list: ${evenNumberList}")
+    val setGreaterThan30Numbers = setExample.filter { it > 30 }
+    println("updated set ${setGreaterThan30Numbers}")
+    println("set in desending order ${setExample.sortedDescending()}}")
+```
+
+## Sequences
+
+> Yet to be added
 
 ## Classes
 

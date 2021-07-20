@@ -18,8 +18,8 @@ fun main() {
     //nullableAndCasting() //for checking null instances and casting them
     //exploreArrays()
     //alphaTests()
-    val varsAndCasting = VarsAndCasting()
-    varsAndCasting.performOps()
+    //val varsAndCasting = VarsAndCasting()
+    //varsAndCasting.performOps()
 }
 
 data class Person(var firstName: String, var lastName: String) {
