@@ -19,7 +19,10 @@
     - [Set](#set)
     - [Map](#map)
   - [Collection Operations](#collection-operations)
-  - [Sequences](#sequences)
+  - [Sequences usage in asynchronous code](#sequences-usage-in-asynchronous-code)
+  - [Command-line arguments and reading user input](#command-line-arguments-and-reading-user-input)
+    - [Reading User Input](#reading-user-input)
+    - [Reading files](#reading-files)
   - [Classes](#classes)
     - [Different ways of creating classes](#different-ways-of-creating-classes)
     - [Constructors and init](#constructors-and-init)
@@ -482,9 +485,93 @@ val listExample = listOf(1,2,3,4,5,6,7,8,9,9,9)
     println("set in desending order ${setExample.sortedDescending()}}")
 ```
 
-## Sequences
+## Sequences usage in asynchronous code
 
-> Yet to be added
+- While performing operation on collections it will run on all the elements in a collection.
+
+```kotlin
+val finalResult = (100 until 150)
+        .map{it * 2}
+        .filter { it % 3 == 0 }
+        .first()
+```
+
+- This can be reduced by using sequence of only few of them will be executed.
+
+```kotlin
+val finalResult = (100 until 150).asSequence()
+        .map{it * 2}
+        .filter { it % 3 == 0 }
+        .first()
+
+```
+
+- Sequence operations will end when there is an end function defined else it will keep on processing
+  Example:
+
+```kotlin
+val myThrees = sequenceOf(1, 3, 5, 7, 9)
+```
+
+will return
+
+```
+kotlin.sequences.FilteringSequence@736e9adb
+```
+
+By appending `toString` we can end executing and get result
+
+```kotlin
+val myThrees = sequenceOf(1, 3, 5, 7, 9).filter { it % 3 == 0 }.toList()
+//Will return
+[3, 9]
+```
+
+## Command-line arguments and reading user input
+
+- Command line arguments can be read by adding and array as input to main function.
+- If any arguments are passed it will be read else null will be returned.
+
+```kotlin
+fun main(args: Array<String>){
+    for (arg in args){
+        println(arg)
+    }
+}
+```
+
+### Reading User Input
+
+- user input can be read by `readLine()` function or scanner
+- While listening for scanner listen for input stream.
+
+```kotlin
+fun readLineExample(){
+    println("Enter a some string: ")
+    val valueOne = readLine() ?: ""
+    println("Entered value is ${valueOne}")
+}
+```
+Using readLine or scanner we can parse the int or double value easily
+
+```kotlin
+fun scanner() {
+    println()
+    val scan = Scanner(System.`in`)
+    print("Enter an integer number: ")
+    val num1 = scan.nextInt()
+    print("Enter an double number: ")
+    val num2 = scan.nextDouble()
+
+    println()
+    println("First input number = $num1")
+    println("Second input number = $num2")
+}
+```
+
+### Reading files
+
+> yet to be updated
 
 ## Classes
 
@@ -589,3 +676,5 @@ class ConstructorReference(val name: String, val dept: String, val location: Str
     private var project = ""
 }
 ```
+
+###
